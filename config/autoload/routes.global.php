@@ -20,5 +20,11 @@ return [
             'middleware' => App\Action\PingAction::class,
             'allowed_methods' => ['GET'],
         ],
+        [
+            'name' => 'rest',
+            'path' => '/rest',
+            'middleware' => App\Action\RestAction::class,
+            'allowed_methods' => ['GET', 'POST', 'PUT', 'DELETE'],
+        ],
     ],
 ];

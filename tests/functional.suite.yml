@@ -9,3 +9,5 @@ modules:
     enabled:
         - ZendExpressive
         - \Helper\Functional
+        - REST:
+            depends: ZendExpressive
