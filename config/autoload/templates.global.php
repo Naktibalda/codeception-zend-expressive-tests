@@ -8,6 +8,10 @@ return [
 
             Zend\Expressive\Template\TemplateRendererInterface::class =>
                 Zend\Expressive\ZendView\ZendViewRendererFactory::class,
+
+            Zend\View\HelperPluginManager::class =>
+                Zend\Expressive\ZendView\HelperPluginManagerFactory::class,
+
         ],
     ],
 
@@ -23,5 +27,12 @@ return [
             'layout' => ['templates/layout'],
             'error'  => ['templates/error'],
         ]
-    ]
+    ],
+
+    'view_helpers' => [
+        'aliases' => [ /* ... */ ],
+        'invokables' => [ /* ... */ ],
+        'factories' => [ /* ... */ ],
+        // add other keys as necessary
+    ],
 ];
