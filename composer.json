@@ -11,7 +11,7 @@
     ],
     "require": {
         "roave/security-advisories": "dev-master",
-        "zendframework/zend-expressive": "1.0.0-rc5@rc",
+        "zendframework/zend-expressive": "^1.0",
         "zendframework/zend-stdlib": "~2.7",
         "zendframework/zend-expressive-zendrouter": "^1.0",
         "zendframework/zend-servicemanager": "^2.5",
