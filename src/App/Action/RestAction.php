@@ -5,6 +5,7 @@ namespace App\Action;
 use Zend\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Zend\Diactoros\UploadedFile;
 
 class RestAction
 {
@@ -17,6 +18,18 @@ class RestAction
             $tokenHeaderValue = null;
         }
 
+        $uploadedFiles = [];
+        foreach ($request->getUploadedFiles() as $fieldName => $uploadedFile) {
+            /**
+             * @var $uploadedFile UploadedFile
+             */
+            $uploadedFiles[$fieldName] = [
+                'name' => $uploadedFile->getClientFilename(),
+                'size' => $uploadedFile->getSize(),
+                'type' => $uploadedFile->getClientMediaType(),
+                'error' => $uploadedFile->getError(),
+            ];
+        }
         $data = array(
             'requestMethod' => $request->getMethod(),
             'requestUri' => $request->getRequestTarget(),
@@ -25,6 +38,7 @@ class RestAction
             'rawBody' => (string)$request->getBody(),
             'headers' => $request->getHeaders(),
             'X-Auth-Token' => $tokenHeaderValue,
+            'files' => $uploadedFiles,
         );
         return new JsonResponse($data);
     }
