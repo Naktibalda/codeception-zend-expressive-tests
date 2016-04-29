@@ -17,19 +17,6 @@ class RestAction
         } else {
             $tokenHeaderValue = null;
         }
-
-        $uploadedFiles = [];
-        foreach ($request->getUploadedFiles() as $fieldName => $uploadedFile) {
-            /**
-             * @var $uploadedFile UploadedFile
-             */
-            $uploadedFiles[$fieldName] = [
-                'name' => $uploadedFile->getClientFilename(),
-                'size' => $uploadedFile->getSize(),
-                'type' => $uploadedFile->getClientMediaType(),
-                'error' => $uploadedFile->getError(),
-            ];
-        }
         $data = array(
             'requestMethod' => $request->getMethod(),
             'requestUri' => $request->getRequestTarget(),
@@ -38,8 +25,29 @@ class RestAction
             'rawBody' => (string)$request->getBody(),
             'headers' => $request->getHeaders(),
             'X-Auth-Token' => $tokenHeaderValue,
-            'files' => $uploadedFiles,
+            'files' => $this->filesToArray($request->getUploadedFiles()),
         );
         return new JsonResponse($data);
+    }
+
+    private function filesToArray(array $files)
+    {
+        $result = [];
+        foreach ($files as $fieldName => $uploadedFile) {
+            /**
+             * @var $uploadedFile UploadedFile|array
+             */
+            if (is_array($uploadedFile)) {
+                $result[$fieldName] = $this->filesToArray($uploadedFile);
+            } else {
+                $result[$fieldName] = [
+                    'name' => $uploadedFile->getClientFilename(),
+                    'size' => $uploadedFile->getSize(),
+                    'type' => $uploadedFile->getClientMediaType(),
+                    'error' => $uploadedFile->getError(),
+                ];
+            }
+        }
+        return $result;
     }
 }
