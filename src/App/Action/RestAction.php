@@ -6,6 +6,7 @@ use Zend\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\UploadedFile;
+use \Codeception\Util\ReflectionHelper;
 
 class RestAction
 {
@@ -42,6 +43,7 @@ class RestAction
             } else {
                 $result[$fieldName] = [
                     'name' => $uploadedFile->getClientFilename(),
+                    'tmp_name' => ReflectionHelper::readPrivateProperty($uploadedFile, 'file'),
                     'size' => $uploadedFile->getSize(),
                     'type' => $uploadedFile->getClientMediaType(),
                     'error' => $uploadedFile->getError(),
