@@ -7,8 +7,8 @@
 $app->pipe(\Zend\Stratigility\Middleware\OriginalMessages::class);
 $app->pipe(\Zend\Stratigility\Middleware\ErrorHandler::class);
 $app->pipe(\Zend\Expressive\Helper\ServerUrlMiddleware::class);
-$app->pipeRoutingMiddleware();
+$app->pipe(\Zend\Expressive\Router\Middleware\RouteMiddleware::class);
 $app->pipe(\Zend\Expressive\Middleware\ImplicitHeadMiddleware::class);
 $app->pipe(\Zend\Expressive\Middleware\ImplicitOptionsMiddleware::class);
-$app->pipeDispatchMiddleware();
+$app->pipe(\Zend\Expressive\Router\Middleware\DispatchMiddleware::class);
 $app->pipe(\Zend\Expressive\Middleware\NotFoundHandler::class);
