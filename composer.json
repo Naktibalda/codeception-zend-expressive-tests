@@ -19,6 +19,7 @@
         "zendframework/zend-expressive-zendviewrenderer": "^1.0",
         "zendframework/zend-expressive-helpers": "~3.0",
         "zendframework/zend-stratigility": "^2.0",
+        "zendframework/zend-config-aggregator": "~1.1",
         "filp/whoops": "^1.1"
     },
     "require-dev": {
