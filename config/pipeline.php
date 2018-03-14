@@ -10,5 +10,5 @@ $app->pipe(\Zend\Expressive\Helper\ServerUrlMiddleware::class);
 $app->pipe(\Zend\Expressive\Router\Middleware\RouteMiddleware::class);
 $app->pipe(\Zend\Expressive\Router\Middleware\ImplicitHeadMiddleware::class);
 $app->pipe(\Zend\Expressive\Router\Middleware\ImplicitOptionsMiddleware::class);
-$app->pipe(\Zend\Expressive\Router\Middleware\DispatchMiddleware::class);
+// $app->pipe(\Zend\Expressive\Router\Middleware\DispatchMiddleware::class);
 $app->pipe(\Zend\Expressive\Middleware\NotFoundHandler::class);
